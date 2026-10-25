@@ -9,7 +9,7 @@ pipeline {
     parameters {
         string(
             name: 'DOCKERHUB_REPO',
-            defaultValue: 'your-dockerhub-username/deployscope',
+            defaultValue: 'lostchampion/deployscope',
             description: 'Docker Hub repository, for example student/deployscope'
         )
         string(

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: deployscope
-          image: docker.io/your-dockerhub-username/deployscope:latest
+          image: docker.io/lostchampion/deployscope:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
