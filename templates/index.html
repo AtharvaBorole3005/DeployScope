@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="description" content="A clear view of the DeployScope CI/CD pipeline and release metadata.">
+    <title>DeployScope — Every Commit. Every Release.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <main id="main" class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="DeployScope home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>DeployScope</span>
+        </a>
+        <span class="topbar-note"><span class="status-dot" aria-hidden="true"></span> CI/CD overview</span>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">A clearer path from commit to cluster</p>
+        <h1 id="hero-title">Every Commit.<br><span>Every Release.</span></h1>
+        <p class="hero-copy">A GitHub commit can trigger Jenkins to test the app, build and publish a Docker image, then deploy it to Kubernetes on Minikube—with a health check at the end.</p>
+      </section>
+
+      <section class="status-panel" aria-label="Current application status">
+        <div class="status-item">
+          <span class="status-label">Application version</span>
+          <strong id="app-version">{{ version.version }}</strong>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Jenkins build</span>
+          <strong id="build-number">{{ version.build_number }}</strong>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Git commit</span>
+          <strong id="commit-sha" class="mono">{{ version.commit_sha }}</strong>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Deployment</span>
+          <strong id="deployment-status" class="deployment-value">{{ version.deployment_status }}</strong>
+        </div>
+      </section>
+      <p class="status-note" id="metadata-note" aria-live="polite">Build metadata uses labelled local-development defaults until configured by a pipeline.</p>
+
+      <section class="section pipeline-section" aria-labelledby="pipeline-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">The delivery path</p>
+            <h2 id="pipeline-title">Pipeline</h2>
+          </div>
+          <span class="run-state"><span class="state-mark" aria-hidden="true"></span>No Jenkins run reported</span>
+        </div>
+        <ol class="pipeline">
+          <li><span class="stage-number">01</span><span class="stage-name">GitHub<br>Checkout</span></li>
+          <li><span class="stage-number">02</span><span class="stage-name">Build &amp;<br>Test</span></li>
+          <li><span class="stage-number">03</span><span class="stage-name">Docker<br>Build</span></li>
+          <li><span class="stage-number">04</span><span class="stage-name">Push<br>Image</span></li>
+          <li><span class="stage-number">05</span><span class="stage-name">Deploy to<br>Minikube</span></li>
+          <li><span class="stage-number">06</span><span class="stage-name">Verify</span></li>
+        </ol>
+      </section>
+
+      <div class="lower-grid">
+        <section class="section release-section" aria-labelledby="release-title">
+          <div class="section-heading compact-heading">
+            <div>
+              <p class="eyebrow">History</p>
+              <h2 id="release-title">Recent releases</h2>
+            </div>
+            <span class="count-label">No records</span>
+          </div>
+          <p class="empty-state"><span class="empty-icon" aria-hidden="true">↗</span>No release history is available yet. Releases will appear here when a real deployment history source is connected.</p>
+        </section>
+
+        <section class="section tech-section" aria-labelledby="tech-title">
+          <div class="section-heading compact-heading">
+            <div>
+              <p class="eyebrow">Toolchain</p>
+              <h2 id="tech-title">Built with</h2>
+            </div>
+          </div>
+          <ul class="tech-list" aria-label="Technology stack">
+            <li>Python</li><li>Flask</li><li>GitHub</li><li>Jenkins</li>
+            <li>Docker</li><li>Docker Hub</li><li>Kubernetes</li><li>Minikube</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <span>DeployScope <span aria-hidden="true">/</span> CCA 2</span>
+        <a href="/api/version">View version metadata <span aria-hidden="true">↗</span></a>
+      </footer>
+    </main>
+  </body>
+</html>
