@@ -21,8 +21,6 @@ pipeline {
 
     environment {
         APP_VERSION = "1.0.${BUILD_NUMBER}"
-        IMAGE_TAG = ''
-        IMAGE = ''
     }
 
     stages {
