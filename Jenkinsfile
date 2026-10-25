@@ -26,19 +26,24 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-                script {
-                    env.IMAGE_TAG = sh(
-                        script: 'git rev-parse HEAD',
-                        returnStdout: true
-                    ).trim()
-                    env.IMAGE = "docker.io/${params.DOCKERHUB_REPO}:${env.IMAGE_TAG}"
-                }
-                echo "Using immutable image tag ${env.IMAGE_TAG}"
-            }
+       
+    stage('Checkout') {
+        steps {
+            checkout scm
+            script {
+                def commitSha = sh(
+                    script: 'git rev-parse HEAD',
+                    returnStdout: true
+                ).trim()
+
+            env.IMAGE_TAG = commitSha
+            env.IMAGE = "docker.io/${params.DOCKERHUB_REPO}:${commitSha}"
+
+            echo "Using immutable image tag: ${commitSha}"
         }
+    }
+}
+
 
         stage('Build and Test') {
             steps {
